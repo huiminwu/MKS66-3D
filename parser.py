@@ -51,6 +51,7 @@ ARG_COMMANDS = [ 'sphere', 'torus', 'box', 'circle', 'bezier', 'hermite', 'line'
 
 def parse_file( fname, edges, transform, screen, color ):
 
+    step = 0.01
     f = open(fname)
     lines = f.readlines()
 
@@ -66,7 +67,8 @@ def parse_file( fname, edges, transform, screen, color ):
             args = lines[c].strip().split(' ')
 
         if line == 'clear':
-
+            edges = []
+            clear_screen(screen)
         elif line == 'box':
             add_box(edges,
                      float(args[0]), float(args[1]), float(args[2]),
@@ -74,7 +76,7 @@ def parse_file( fname, edges, transform, screen, color ):
         elif line == 'sphere':
             add_sphere(edges,
                      float(args[0]), float(args[1]), float(args[2]),
-                     float(args[3]))
+                     float(args[3]), step)
         elif line == 'torus':
             add_sphere(edges,
                      float(args[0]), float(args[1]), float(args[2]),
