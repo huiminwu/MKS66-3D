@@ -34,13 +34,14 @@ def add_box( points, x, y, z, width, height, depth ):
 def generate_sphere( points, cx, cy, cz, r, step ):
     phi = 0
     points = []
-    while phi < 2 * math.pi :
+    twopi = 2 * math.pi
+    while phi < 1 :
         theta = 0
         # semicircle
-        while theta <= math.pi :
-            x = r * math.cos(theta) + cx
-            y = r * math.sin(theta) * math.cos(phi) + cy
-            z = r * math.sin(theta) * math.sin(phi) + cz
+        while theta <= 0.5 :
+            x = r * math.cos(twopi * theta) + cx
+            y = r * math.sin(twopi * theta) * math.cos(twopi * phi) + cy
+            z = r * math.sin(twopi * theta) * math.sin(twopi * phi) + cz
             add_point(points, x, y, z)
             theta += step
         phi += step
@@ -65,12 +66,13 @@ def add_sphere( points, cx, cy, cz, r, step ):
 def generate_torus( points, cx, cy, cz, r0, r1, step ):
     phi = 0
     points = []
-    while phi < 2 * math.pi :
+    twopi = 2 * math.pi
+    while phi < 1 :
         theta = 0
-        while theta < 2 * math.pi :
-            x = r0 * math.cos(phi) * math.cos(theta) + r1 * math.cos(phi) + cx
-            y = r0 * math.sin(theta) + cy
-            z = -1 * r0 * math.sin(phi) * math.cos(theta) - r1 * math.sin(phi) + cz
+        while theta < 1 :
+            x = r0 * math.cos(twopi * phi) * math.cos(twopi * theta) + r1 * math.cos(twopi * phi) + cx
+            y = r0 * math.sin(twopi * theta) + cy
+            z = -1 * r0 * math.sin(twopi * phi) * math.cos(twopi * theta) - r1 * math.sin(twopi * phi) + cz
             add_point(points, x, y, z)
             theta += step
         phi += step
